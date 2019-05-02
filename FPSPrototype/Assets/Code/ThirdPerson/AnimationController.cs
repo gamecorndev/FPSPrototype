@@ -21,7 +21,7 @@ public class AnimationController : MonoBehaviour
     public float RotationSpeed = 3f;
     public float StoredX;
     public Vector3 angleDirect;
-
+    public bool Jumping;
     // check Right movement
 
     public float lastPosition;
@@ -43,17 +43,22 @@ public class AnimationController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-     
+
+        if (Jumping == true)
+            return;
+        
         SetAnimations();
      
     }
+
 
   // enables player to look in a direction
     private void LateUpdate()
     {
 
-        
-      
+
+        if (Jumping == true)
+            return;
 
         Chest.LookAt(LookAtTarget);
         if(look.mouseX > 0)
@@ -111,6 +116,26 @@ public class AnimationController : MonoBehaviour
        anim.SetBool("Aim", aim);
     }
 
+    public void PlayJumpAnimation()
+    {
+        Jumping = true;
+        anim.SetBool("Jumping", true);
+        Debug.Log("PlayedJumpAnimation");
+    }
 
+    public void StopJumpingAnimation()
+    {
+        Jumping = false;
+        anim.SetBool("Jumping", false);
+        Debug.Log("ExitedJumpAnimation");
+    }
   
+    public void PlayReloadAnimation()
+    {
+        anim.SetBool("Reloading", true);
+    }
+    public void StopReloadAnimation()
+    {
+        anim.SetBool("Reloading", false);
+    }
 }

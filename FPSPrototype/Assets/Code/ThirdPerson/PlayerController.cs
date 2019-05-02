@@ -23,9 +23,11 @@ public class PlayerController : MonoBehaviour
     Animator animator;
     Transform cameraT;
     CharacterController controller;
+    AnimationController AnimController;
 
     void Start()
     {
+        AnimController.GetComponent<AnimationController>();
         animator = GetComponentInChildren<Animator>();
         cameraT = Camera.main.transform;
         controller = GetComponent<CharacterController>();
@@ -49,7 +51,7 @@ public class PlayerController : MonoBehaviour
         float animationSpeedPercent = ((running) ? currentSpeed / runSpeed : currentSpeed / walkSpeed * .5f);
         // set name of forward animation here
 
-        animator.SetFloat("Forward", animationSpeedPercent, speedSmoothTime, Time.deltaTime);
+        //animator.SetFloat("Forward", animationSpeedPercent, speedSmoothTime, Time.deltaTime);
 
     }
 
@@ -73,6 +75,8 @@ public class PlayerController : MonoBehaviour
         if (controller.isGrounded)
         {
             velocityY = 0;
+            // NOTE check if .. lag remove and set a wait in animation to time stop jumping
+           AnimController.StopJumpingAnimation();
         }
 
     }
@@ -81,8 +85,11 @@ public class PlayerController : MonoBehaviour
     {
         if (controller.isGrounded)
         {
+          
             float jumpVelocity = Mathf.Sqrt(-2 * gravity * jumpHeight);
             velocityY = jumpVelocity;
+            Debug.Log("HitJumpbutton");
+            AnimController.PlayJumpAnimation();
         }
     }
 

@@ -22,14 +22,14 @@ public class Gun : MonoBehaviour {
     public GameObject impactEffect;
     public GameObject impactZombie;
     public Camera fpsCam;
-
+    public AnimationController animController;
 
     private float nextTimeToFire = 0f;
     // Use this for initialization
     void Start()
     {
         FillAmmo();
-
+        animController = gameObject.GetComponentInParent<AnimationController>();
     }
 
     // Update is called once per frame
@@ -91,6 +91,7 @@ public class Gun : MonoBehaviour {
     {
         isReloading = true;
         Debug.Log("Relaoding...");
+        animController.PlayReloadAnimation();
         yield return new WaitForSeconds(reloadTime);
 
         if (Clip == MaxClip)
@@ -119,6 +120,7 @@ public class Gun : MonoBehaviour {
                 Debug.Log("ran out of ammo");
             }
         }
+        animController.StopReloadAnimation();
         isReloading = false;
     }
 
