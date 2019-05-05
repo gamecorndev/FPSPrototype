@@ -84,6 +84,11 @@ public class InputHandler : MonoBehaviour
     PlayerController controller;
     PlayerLook look;
 
+    // tutorial variables
+    public float Vertical;
+    public float Horizontal;
+    public Vector2 MouseInput;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -93,7 +98,9 @@ public class InputHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        Vertical = Input.GetAxis(VerticalInput);
+        Horizontal = Input.GetAxis(HorizontalInput);
+        MouseInput = new Vector2(Input.GetAxisRaw(MouseXInput), Input.GetAxisRaw(MouseYInput));
     }
 
     public void SetUpInputsForGame()

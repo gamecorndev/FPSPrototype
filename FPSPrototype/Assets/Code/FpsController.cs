@@ -36,7 +36,7 @@ public class FpsController : MonoBehaviour {
     [SerializeField]
     private KeyCode jumpKey;
 
-
+    AnimationController AnimControl;
     public bool isJumping;
 
     // the inputs of movement
@@ -46,6 +46,7 @@ public class FpsController : MonoBehaviour {
     // Use this for initialization
     void Awake () {
         charController = GetComponent<CharacterController>();
+        AnimControl = GetComponent<AnimationController>();
 	}
 	
 	// Update is called once per frame
@@ -102,6 +103,7 @@ public class FpsController : MonoBehaviour {
         if(Input.GetKeyDown(jumpKey) && !isJumping)
         {
             isJumping = true;
+            AnimControl.PlayJumpAnimation();
             StartCoroutine(JumpEvent());
         }
     }
@@ -122,5 +124,7 @@ public class FpsController : MonoBehaviour {
 
         charController.slopeLimit = 45.0f;
         isJumping = false;
+
+        AnimControl.StopJumpingAnimation();
     }
 }

@@ -15,6 +15,7 @@ public class PlayerLook : MonoBehaviour {
     private float xAxisClamp;
 
     private FpsController controller;
+   public Animator anim;
 
     // mouse input
     public float mouseY;
@@ -34,7 +35,7 @@ public class PlayerLook : MonoBehaviour {
     public Transform JumpOffset;
     bool switchCamPosition;
     public bool AimingIsTrue;
-
+    public float StoreX;
     // bool check
     public enum CamStates
     {
@@ -58,7 +59,9 @@ public class PlayerLook : MonoBehaviour {
     // Use this for initialization
     void Start () {
         // playerBody = gameObject.GetComponentInParent<Transform>();
-        controller = gameObject.GetComponentInParent<FpsController>();
+          controller = gameObject.GetComponentInParent<FpsController>();
+        // anim = gameObject.GetComponentInParent<PlayerMovement>().Animator;
+      //  anim = GetComponent<Animator>();
     }
 	
 	// Update is called once per frame
@@ -96,6 +99,9 @@ public class PlayerLook : MonoBehaviour {
         }
         transform.Rotate(Vector3.left * mouseY);
         playerBody.Rotate(Vector3.up * mouseX);
+
+
+     
     }
 
     private void ClampXAxisRotationToValue(float value)

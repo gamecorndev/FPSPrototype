@@ -60,7 +60,7 @@ public class AnimationController : MonoBehaviour
         if (Jumping == true)
             return;
 
-        Chest.LookAt(LookAtTarget);
+      //  Chest.LookAt(LookAtTarget);
         if(look.mouseX > 0)
         {
             StoredX += 1.5f;
@@ -75,8 +75,9 @@ public class AnimationController : MonoBehaviour
             if (StoredX < -ClamRotationAim)
                 StoredX = -ClamRotationAim;
         }
-        Vector3 Direct = new Vector3(0,StoredX *RotationSpeed , 0);
-        Chest.rotation = Chest.rotation * Quaternion.Euler(Direct);
+        // aim
+       // Vector3 Direct = new Vector3(0,StoredX *RotationSpeed , 0);
+      //  Chest.rotation = Chest.rotation * Quaternion.Euler(Direct);
         
     }
     public void SetAnimations()
