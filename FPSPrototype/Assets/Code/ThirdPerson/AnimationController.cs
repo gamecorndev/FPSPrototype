@@ -60,7 +60,7 @@ public class AnimationController : MonoBehaviour
         if (Jumping == true)
             return;
 
-      //  Chest.LookAt(LookAtTarget);
+        Chest.LookAt(LookAtTarget);
         if(look.mouseX > 0)
         {
             StoredX += 1.5f;
@@ -76,8 +76,8 @@ public class AnimationController : MonoBehaviour
                 StoredX = -ClamRotationAim;
         }
         // aim
-       // Vector3 Direct = new Vector3(0,StoredX *RotationSpeed , 0);
-      //  Chest.rotation = Chest.rotation * Quaternion.Euler(Direct);
+       Vector3 Direct = new Vector3(0,StoredX *RotationSpeed , 0);
+      Chest.rotation = Chest.rotation * Quaternion.Euler(Direct);
         
     }
     public void SetAnimations()
@@ -92,9 +92,9 @@ public class AnimationController : MonoBehaviour
               }
 
               anim.SetFloat("TurnDirection", look.mouseX);
-        //    Vector3 TurnAngle = new Vector3(0, look.mouseX  *6f, 0);
-         //   Chest.rotation = Chest.rotation * Quaternion.Euler(TurnAngle);
-           // anim.SetFloat("TurnDirection", look.mouseX);
+            Vector3 TurnAngle = new Vector3(0, look.mouseX  *6f, 0);
+            Chest.rotation = Chest.rotation * Quaternion.Euler(TurnAngle);
+          anim.SetFloat("TurnDirection", look.mouseX);
         }
         // move
         else
